@@ -1,0 +1,15 @@
+nginx:
+    image: 'nickstenning/mediawiki'
+    ports:
+        - "8880:80"
+    links:
+        - db:database
+    volumes:
+        - /data/wiki2:/data
+
+db:
+    image: "mysql"
+    expose:
+        - "3306"
+    environment:
+        - MYSQL_ROOT_PASSWORD=defaultpass
