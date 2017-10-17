@@ -1,15 +1,9 @@
-nginx:
-    image: 'nickstenning/mediawiki'
+version: '2.1'
+services:
+  nginx:
+    image: 'nginx'
     ports:
-        - "8880:80"
-    links:
-        - db:database
+        - "80:80"
     volumes:
-        - /data/wiki2:/data
-
-db:
-    image: "mysql"
-    expose:
-        - "3306"
-    environment:
-        - MYSQL_ROOT_PASSWORD=defaultpass
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./src:/var/www
