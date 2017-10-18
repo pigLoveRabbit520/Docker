@@ -3,7 +3,16 @@ services:
   nginx:
     image: 'nginx'
     ports:
-        - "80:80"
+      - "80:80"
     volumes:
-        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-        - ./src:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./src:/var/www/app
+    depends_on:
+      - php
+  php:
+    image: 'php:7.1-fpm'
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/var/www/app
+      - ./php/php-fpm.conf:/usr/local/etc/php-fpm.conf
